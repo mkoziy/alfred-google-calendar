@@ -4,7 +4,10 @@
 
 - Quick add an event
 
+## Download
 
+* [Download Workflow](https://github.com/mkoziy/alfred-google-calendar/blob/0.1/Google%20Calendar.alfredworkflow).
+* Install using Alfred.
 
 ## Setup
 
