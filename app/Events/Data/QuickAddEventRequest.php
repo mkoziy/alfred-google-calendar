@@ -2,47 +2,13 @@
 
 namespace App\Events\Data;
 
+use Katapoka\Katapoka\Dto;
+
+/**
+ * @property string text
+ * @property string calendarId
+ */
 class QuickAddEventRequest
 {
-    /**
-     * @var string
-     */
-    private $text;
-
-    /**
-     * @var string
-     */
-    private $calendarId;
-
-    /**
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->text;
-    }
-
-    /**
-     * @param string $text
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCalendarId()
-    {
-        return $this->calendarId;
-    }
-
-    /**
-     * @param string $calendarId
-     */
-    public function setCalendarId($calendarId)
-    {
-        $this->calendarId = $calendarId;
-    }
+    use Dto;
 }

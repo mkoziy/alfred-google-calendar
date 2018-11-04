@@ -4,12 +4,11 @@ namespace App\Commands;
 
 use App\Events\Data\QuickAddEventRequest;
 use App\Events\EventsFacade;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class QuickAddEventCommand extends Command
+class QuickAddEventCommand extends AbstractCommand
 {
     const CALENDAR_ID_ARGUMENT = 'Calendar ID';
     const TEXT_ARGUMENT = 'Text';
@@ -31,6 +30,8 @@ class QuickAddEventCommand extends Command
      */
     protected function configure()
     {
+        parent::configure();
+
         $this
             ->setName('events:quick-add')
             ->setDescription('Adds an event to the calendar')
@@ -48,8 +49,8 @@ class QuickAddEventCommand extends Command
         $quickAddEventRequest = $this->createRequest($input);
         $response = $this->eventsFacade->quickSave($quickAddEventRequest);
 
-        if (!$response->isSuccess()) {
-            $this->writeError($output, $response->getErrorMessage());
+        if (!$response->success) {
+            $this->writeError($output, $response->errorMessage);
 
             return;
         }
@@ -57,30 +58,16 @@ class QuickAddEventCommand extends Command
         $this->writeInfo($output, 'Done');
     }
 
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @return \App\Events\Data\QuickAddEventRequest
+     */
     private function createRequest(InputInterface $input)
     {
         $quickAddEventRequest = new QuickAddEventRequest();
-        $quickAddEventRequest->setCalendarId($input->getArgument(static::CALENDAR_ID_ARGUMENT));
-        $quickAddEventRequest->setText($input->getArgument(static::TEXT_ARGUMENT));
+        $quickAddEventRequest->calendarId = $input->getArgument(static::CALENDAR_ID_ARGUMENT);
+        $quickAddEventRequest->text = $input->getArgument(static::TEXT_ARGUMENT);
 
         return $quickAddEventRequest;
-    }
-
-    /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param string $message
-     */
-    private function writeError(OutputInterface $output, $message)
-    {
-        $output->writeln(sprintf('<error>%s</error>', $message));
-    }
-
-    /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param string $message
-     */
-    private function writeInfo(OutputInterface $output, $message)
-    {
-        $output->writeln(sprintf('<info>%s</info>', $message));
     }
 }

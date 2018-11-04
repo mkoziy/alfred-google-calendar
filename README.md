@@ -3,10 +3,11 @@
 ## Functions:
 
 - Quick add an event
+- See the events list for a specific date
 
 ## Download
 
-* [Download Workflow](https://github.com/mkoziy/alfred-google-calendar/raw/0.1/Google%20Calendar.alfredworkflow).
+* [Download Workflow](https://github.com/mkoziy/alfred-google-calendar/raw/0.2/Google%20Calendar.alfredworkflow).
 * Install using Alfred.
 
 ## Setup
@@ -39,10 +40,12 @@
 ## Usage
 
 - Quick add. Type `gcqa Appointment at Somewhere on June 3rd 10am-10:25am`
+- The daily events list `gcdl yesterday`. The default value for the date is `today`, so you can type `gcdl [space]`. The result will be shown using the `Alfred Large` feature.
 
 
 
 ## ToDo
 
 * Quick add to different calendars
-* The events list
+
+* Events list from different calendars

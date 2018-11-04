@@ -39,14 +39,14 @@ class EventQuickSaver
         try {
             $event = $this->service
                 ->events
-                ->quickAdd($request->getCalendarId(), $request->getText());
+                ->quickAdd($request->calendarId, $request->text);
         } catch (\Google_Service_Exception $exception) {
-            $response->setErrorMessage($this->getErrorMessage($exception));
+            $response->errorMessage = $this->getErrorMessage($exception);
 
             return $response;
         }
 
-        $response->setSuccess($event->getStatus() === static::CONFIRMED_STATUS);
+        $response->success = $event->getStatus() === static::CONFIRMED_STATUS;
 
         return $response;
     }
